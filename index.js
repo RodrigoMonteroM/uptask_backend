@@ -30,14 +30,15 @@ const servidor = app.listen(PORT, () => {
 
 import { Server } from "socket.io";
 
-const io = new Server(servidor, {
+/* const io = new Server(servidor, {
   pingTimeout: 60000,
   cors: {
     origin: process.env.FRONTEND_URL,
   },
-});
+}); */
 
-io.on("connection", (socket) => {
+
+/* io.on("connection", (socket) => {
   console.log("connected to socket.io");
 
   //define los eventos de socket io
@@ -48,3 +49,4 @@ io.on("connection", (socket) => {
 
   socket.emit("respuesta")
 });
+ */
