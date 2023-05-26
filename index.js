@@ -10,14 +10,16 @@ const app = express();
 dotenv.config(); // get variables envirioment
 connectDB();
 
-const whiteList = [process.env.FRONTEND_URL];
+//const whiteList = [process.env.FRONTEND_URL];
 
 app.use(express.json());
 
 const PORT = process.env.PORT || 2500 || 1500;
 
 //Routing
-app.use(cors(whiteList));
+//app.use(cors(whiteList));
+app.use(cors());
+//app.use(cors(whiteList));
 app.use("/api/usuarios", usuarioRouter);
 app.use("/api/proyectos", proyectoRouter);
 app.use("/api/tareas", tareaRouter);
