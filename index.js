@@ -10,16 +10,25 @@ const app = express();
 dotenv.config(); // get variables envirioment
 connectDB();
 
-//const whiteList = [process.env.FRONTEND_URL];
+
+const whiteList = [process.env.FRONTEND_URL];
+
+/*  const corsOptions = {
+  origin: function (origin, callback) {
+    if(whiteList.includes(origin)){
+      callback(null, true)
+    }else{
+      callback(new Error("Cors error"))
+    }
+  },
+}; */ 
 
 app.use(express.json());
-
+//TODO: Resolve cors bug
+app.use(cors());
 const PORT = process.env.PORT || 2500 || 1500;
 
 //Routing
-//app.use(cors(whiteList));
-app.use(cors());
-//app.use(cors(whiteList));
 app.use("/api/usuarios", usuarioRouter);
 app.use("/api/proyectos", proyectoRouter);
 app.use("/api/tareas", tareaRouter);
@@ -27,28 +36,3 @@ app.use("/api/tareas", tareaRouter);
 const servidor = app.listen(PORT, () => {
   console.log("Listen in port: " + PORT);
 });
-
-//socket io
-
-import { Server } from "socket.io";
-
-/* const io = new Server(servidor, {
-  pingTimeout: 60000,
-  cors: {
-    origin: process.env.FRONTEND_URL,
-  },
-}); */
-
-
-/* io.on("connection", (socket) => {
-  console.log("connected to socket.io");
-
-  //define los eventos de socket io
-
-  socket.on("prueba", (nombre) => {
-    console.log("prueba desde socket io " , nombre);
-  });
-
-  socket.emit("respuesta")
-});
- */
