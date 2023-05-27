@@ -6,6 +6,8 @@ import { emailRegistro, emailOlvidePassoword } from "../helpers/email.js";
 
 const registrar = async (req, res) => {
   //evitar registro duplicado
+  console.log("creado")
+
   const { email } = req.body;
 
   const ExisteUsuario = await Usuario.findOne({ email });
@@ -32,13 +34,17 @@ const registrar = async (req, res) => {
       msj: "Usuario creado correctamente, Revisa tu email para confirmar la cuenta",
     });
   } catch (err) {
-    console.log(err);
+    console.log(err)
+    const error = new Error("Error server");
+    return res.status(400).json({ msj: error.message });
   }
 };
 
 const autenticar = async (req, res) => {
   //comprobar si el usuario existe
+
   const { email, password } = req.body;
+  console.log("autenticando")
 
   //console.log(req.body);
   const usuario = await Usuario.findOne({ email });
